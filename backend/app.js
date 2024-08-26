@@ -1,15 +1,15 @@
 const express = require("express");
-const SerialPort = require("serialport");
+const { SerialPort } = require('serialport');
 const cors = require("cors");
 
 const app = express();
 app.use(cors()); 
 app.use(express.json()); 
 
-// const port = new SerialPort('COM3', { baudRate: 9600 });
-// port.on('error', (err) => {
-//     console.error('Error: ', err.message);
-//   });
+const port = new SerialPort({ path: 'COM3', baudRate: 9600 });
+ port.on('error', (err) => {
+     console.error('Error: ', err.message);
+   });
 
 app.post("/led/:state", (req, res) => {
     const state = req.params.state;
